@@ -13,6 +13,14 @@
 |
 */
 
+use App\Services\UrlService;
+
 $router->get('/', function () {
     return view('index');
+});
+
+$router->get('/test', function () {
+    $UrlService = new UrlService();
+    $url = 'https://example.com/foo/bar?qs=baz';
+    dd(uniqid());
 });

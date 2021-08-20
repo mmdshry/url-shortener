@@ -18,4 +18,9 @@ class UrlService
         return (bool)filter_var($url, FILTER_VALIDATE_URL);
     }
 
+
+    final public function uniqueId()
+    {
+    }
+
 }
