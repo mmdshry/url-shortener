@@ -16,9 +16,8 @@ class Urls extends Migration
         Schema::create('urls', function(Blueprint $table) {
             $table->id();
             $table->string('url')->index();
-            $table->string('redirect')->index();
-            $table->string('redirect')->index();
-            $table->dateTime('expire_at');
+            $table->string('redirectId')->unique();
+            $table->date('expires_at')->nullable();
             $table->timestamps();
         });
     }
