@@ -3,7 +3,6 @@
 namespace Database\Seeders;
 
 use App\Models\Urls;
-use Database\Factories\UrlsFactory;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder

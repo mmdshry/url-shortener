@@ -13,23 +13,25 @@ class Urls extends Model
 
     /**
      * The attributes that are mass assignable.
+     *
      * @var array
      */
     protected $fillable = [
         'url',
         'redirectId',
-        'expires_at'
+        'expires_at',
     ];
 
-
     /**
-     * Date columns
+     * Date columns.
+     *
      * @var string[]
      */
     protected $dates = ['expires_at'];
 
     /**
-     * Hidden columns
+     * Hidden columns.
+     *
      * @var string[]
      */
     protected $hidden = ['id'];

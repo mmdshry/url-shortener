@@ -13,7 +13,8 @@ class BaseRepository implements EloquentRepositoryInterface
 
     /**
      * BaseRepository constructor.
-     * @param Model $model
+     *
+     * @param  Model  $model
      */
     public function __construct(Model $model)
     {
@@ -21,7 +22,7 @@ class BaseRepository implements EloquentRepositoryInterface
     }
 
     /**
-     * @param array $attributes
+     * @param  array  $attributes
      * @return Model
      */
     public function create(array $attributes): ?Model
@@ -38,10 +39,9 @@ class BaseRepository implements EloquentRepositoryInterface
         return $this->model->find($id);
     }
 
-
     /**
-     * @param string $redirectId
-     * @param array  $payload
+     * @param  string  $redirectId
+     * @param  array  $payload
      * @return bool
      */
     public function update(string $redirectId, array $payload): bool
