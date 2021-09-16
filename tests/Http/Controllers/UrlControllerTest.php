@@ -10,7 +10,6 @@ use DB;
 use Illuminate\Database\SQLiteConnection;
 use Laravel\Lumen\Testing\DatabaseMigrations;
 use Laravel\Lumen\Testing\WithoutMiddleware;
-use Mockery;
 use Mockery\Mock;
 use TestCase;
 
@@ -21,7 +20,6 @@ use TestCase;
  */
 class UrlControllerTest extends TestCase
 {
-
     use DatabaseMigrations;
     use WithoutMiddleware;
     /**
@@ -50,7 +48,7 @@ class UrlControllerTest extends TestCase
         }
         $this->urlService = app(UrlService::class);
         $this->urlRepository = app(UrlRepositoryInterface::class);
-        $this->urlController = new UrlController($this->urlRepository,$this->urlService);
+        $this->urlController = new UrlController($this->urlRepository, $this->urlService);
     }
 
     /**
@@ -89,7 +87,7 @@ class UrlControllerTest extends TestCase
     public function testUpdate(): void
     {
         /** @todo This test is incomplete. */
-        $this->get('/', [ /* data */ ])
+        $this->get('/', [/* data */])
             ->assertResponseOk();
     }
 

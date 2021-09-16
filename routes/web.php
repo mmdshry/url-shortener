@@ -21,11 +21,10 @@ $router->get('/', function () use ($router) {
 
 $router->get('/{redirectId}', 'UrlController@redirectUrl');
 
-$router->group(['prefix' => 'api/url','as'=>'API.URL.'], function () use ($router) {
-    $router->get('',  'UrlController@index');
-    $router->get('{redirectId}',  'UrlController@show');
-    $router->post('',  'UrlController@create');
-    $router->put('',  'UrlController@update');
-    $router->delete('{redirectId}',  'UrlController@destroy');
+$router->group(['prefix' => 'api/url', 'as'=>'API.URL.'], function () use ($router) {
+    $router->get('', 'UrlController@index');
+    $router->get('{redirectId}', 'UrlController@show');
+    $router->post('', 'UrlController@create');
+    $router->put('', 'UrlController@update');
+    $router->delete('{redirectId}', 'UrlController@destroy');
 });
-

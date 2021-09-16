@@ -13,7 +13,7 @@ class Urls extends Migration
      */
     public function up()
     {
-        Schema::create('urls', function(Blueprint $table) {
+        Schema::create('urls', function (Blueprint $table) {
             $table->id();
             $table->string('url')->index();
             $table->string('redirectId')->unique();

@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Repositories\Eloquent\Url\UrlRepository;
 use App\Repositories\Eloquent\Url\UrlRepositoryInterface;
 use App\Services\UrlService;
-use Exception;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -26,6 +25,7 @@ class UrlController extends Controller
 
     /**
      * Create a new controller instance.
+     *
      * @return void
      */
     public function __construct(UrlRepositoryInterface $urlRepository, UrlService $urlService)
@@ -33,7 +33,6 @@ class UrlController extends Controller
         $this->urlService = $urlService;
         $this->urlRepository = $urlRepository;
     }
-
 
     /**
      * @return JsonResponse
@@ -44,7 +43,7 @@ class UrlController extends Controller
     }
 
     /**
-     * @param Request $request
+     * @param  Request  $request
      * @return JsonResponse
      */
     public function create(Request $request): ?JsonResponse
@@ -59,20 +58,22 @@ class UrlController extends Controller
     }
 
     /**
-     * @param string $redirectId
+     * @param  string  $redirectId
      * @return JsonResponse
      */
     public function show(string $redirectId): JsonResponse
     {
         if ($this->urlRepository->isRedirectIdExists($redirectId)) {
             $model = $this->urlRepository->findByRedirectId($redirectId);
+
             return $this->sendResponse('Url Fetched Successfully', $model, Response::HTTP_OK);
         }
+
         return $this->sendError('The Link Does Not Exists!', Response::HTTP_NOT_FOUND);
     }
 
     /**
-     * @param Request $request
+     * @param  Request  $request
      * @return JsonResponse
      */
     public function update(Request $request): JsonResponse
@@ -81,6 +82,7 @@ class UrlController extends Controller
 
         if ($response['success']) {
             $model = $this->urlRepository->findByRedirectId($request->redirectId);
+
             return $this->sendResponse('Url Updated Successfully', $model, $response['code']);
         }
 
@@ -88,21 +90,22 @@ class UrlController extends Controller
     }
 
     /**
-     * @param string $redirectId
+     * @param  string  $redirectId
      * @return JsonResponse
      */
     public function destroy(string $redirectId): JsonResponse
     {
         if ($this->urlRepository->isRedirectIdExists($redirectId)) {
             $model = $this->urlRepository->findByRedirectId($redirectId);
+
             return $this->sendResponse('Url Destroyed Successfully', $model, Response::HTTP_OK);
         }
+
         return $this->sendError('The Link Does Not Exists!', Response::HTTP_NOT_FOUND);
     }
 
-
     /**
-     * @param string $redirectId
+     * @param  string  $redirectId
      * @return JsonResponse|RedirectResponse|Redirector
      */
     public function redirectUrl(string $redirectId)
@@ -112,8 +115,10 @@ class UrlController extends Controller
             if ($this->urlRepository->isRedirectIdValid($model)) {
                 return redirect($model->url);
             }
+
             return $this->sendError('The Link Has Been Expired!', Response::HTTP_GONE);
         }
+
         return $this->sendError('The Link Does Not Exists!', Response::HTTP_NOT_FOUND);
     }
 }

@@ -17,7 +17,7 @@ class UrlService
     private UrlRepositoryInterface $urlRepository;
 
     /**
-     * @param UrlRepositoryInterface $urlRepository
+     * @param  UrlRepositoryInterface  $urlRepository
      */
     public function __construct(UrlRepositoryInterface $urlRepository)
     {
@@ -25,8 +25,9 @@ class UrlService
     }
 
     /**
-     * Create new record with given data
-     * @param array $data
+     * Create new record with given data.
+     *
+     * @param  array  $data
      * @return array
      */
     public function store(array $data): array
@@ -46,8 +47,9 @@ class UrlService
             $model = $this->urlRepository->create([
                 'url' => $validated['url'],
                 'redirectId' => $this->generateUniqueRedirectId(),
-                'expires_at' => $validated['expires_at'] ?? null
+                'expires_at' => $validated['expires_at'] ?? null,
             ]);
+
             return ['success' => true, 'data' => $model, 'code' => Response::HTTP_CREATED];
         } catch (Exception $exception) {
             return ['success' => false, 'data' => $exception->getMessage(), 'code' => Response::HTTP_INTERNAL_SERVER_ERROR];
@@ -55,8 +57,9 @@ class UrlService
     }
 
     /**
-     * Update record of given redirect id
-     * @param array $data
+     * Update record of given redirect id.
+     *
+     * @param  array  $data
      * @return array
      */
     public function update(array $data): array
@@ -64,7 +67,7 @@ class UrlService
         $validator = Validator::make($data, [
             'redirectId' => 'required|string|min:4|max:4',
             'url' => 'required_without:expires_at|url',
-            'expires_at' => 'required_without:url|date'
+            'expires_at' => 'required_without:url|date',
         ]);
 
         if ($validator->fails()) {
@@ -74,7 +77,8 @@ class UrlService
         $validated = $validator->validated();
 
         try {
-            $model = $this->urlRepository->update($validated['redirectId'],$validated);
+            $model = $this->urlRepository->update($validated['redirectId'], $validated);
+
             return ['success' => true, 'data' => $model, 'code' => Response::HTTP_OK];
         } catch (Exception $exception) {
             return ['success' => false, 'data' => $exception->getMessage(), 'code' => Response::HTTP_INTERNAL_SERVER_ERROR];
@@ -94,5 +98,4 @@ class UrlService
 
         return $uniqueId;
     }
-
 }
